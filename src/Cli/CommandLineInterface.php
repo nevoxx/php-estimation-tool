@@ -45,7 +45,6 @@ class CommandLineInterface
 
         // Process the remaining arguments
         foreach (array_slice($args, 2) as $arg) {
-            var_dump($arg);
             switch ($arg) {
                 case '--render':
                     $this->render = true;
