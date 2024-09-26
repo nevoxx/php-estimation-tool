@@ -1,5 +1,8 @@
 {
     "name": "nevoxx/php-estimation",
+    "scripts": {
+        "estimate": "php ./src/estimation.php"
+    },
     "autoload": {
         "psr-4": {
             "App\\Estimations\\": "src/"

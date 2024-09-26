@@ -77,9 +77,7 @@ try {
     $mdOutputFile = $cli->getMdOutputFile();
 
     displayInfo($markdownPath, $render, $pdfOutputFile, $mdOutputFile);
-
     processMarkdown($markdownPath, $mdOutputFile, $render);
-
 } catch (Exception $e) {
     echo "❌  An error occurred: " . $e->getMessage() . "\n";
 }

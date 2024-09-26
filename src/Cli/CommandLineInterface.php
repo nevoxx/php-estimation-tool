@@ -19,7 +19,7 @@ class CommandLineInterface
         // Check if there are enough arguments
         if (count($args) < 2) {
             $this->displayHelp();
-            exit(1);
+            exit(0);
         }
 
         // Extract the required markdown path
@@ -27,8 +27,8 @@ class CommandLineInterface
 
         // Validate if the markdown path exists
         if (!file_exists($this->markdownPath)) {
-            echo "Error: The specified markdown file does not exist: {$this->markdownPath}\n";
-            exit(1);
+            echo "❌ Error: The specified markdown file does not exist: {$this->markdownPath}\n";
+            exit(0);
         }
 
         // Set default values for output files
@@ -51,21 +51,28 @@ class CommandLineInterface
                     $this->displayHelp();
                     exit(0);
                 default:
-                    echo "Error: Unknown argument: {$arg}\n";
+                    echo "❌ Error: Unknown argument: {$arg}\n";
                     $this->displayHelp();
-                    exit(1);
+                    exit(0);
             }
         }
     }
 
     private function displayHelp(): void
     {
-        echo "Usage: php estimation.php /path/to/markdown.md [options]\n";
+        // Display a header with some ASCII art
+        echo "\n";
+        echo "==============================\n";
+        echo "  📚 Help - Estimation Tool  \n";
+        echo "==============================\n\n";
+        
+        echo "Usage: php estimation.php /path/to/markdown.md [options]\n\n";
         echo "Options:\n";
-        echo "  --render                 Enable rendering of the markdown.\n";
-        echo "  --pdf-outfile=/path/to/output.pdf  Specify the PDF output file.\n";
-        echo "  --md-outfile=/path/to/output.md    Specify the Markdown output file.\n";
-        echo "  --help                   Display this help message.\n";
+        echo str_pad("  --render", 40) . " 🌟 Enable rendering of the markdown.\n";
+        echo str_pad("  --pdf-outfile=/path/to/output.pdf", 40) . " 📄 Specify the PDF output file.\n";
+        echo str_pad("  --md-outfile=/path/to/output.md", 40) . " 📜 Specify the Markdown output file.\n";
+        echo str_pad("  --help", 40) . " ❓ Display this help message.\n";
+        echo "\n";
     }
 
     public function getMarkdownPath(): string
