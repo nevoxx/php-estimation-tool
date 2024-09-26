@@ -23,8 +23,8 @@ class MarkdownParser
             if (trim($line)[0] === '-') {
                 $indentLevel = strlen($line) - strlen(ltrim($line));
                 $cleanLine = trim($line);
-
-                // Assuming this function exists and works similarly in PHP
+                
+                // Parse duration and percentage (if exists)
                 $parsedData = $this->_parseDurationAndPercentage($cleanLine);
 
                 $duration = $parsedData['duration'];
