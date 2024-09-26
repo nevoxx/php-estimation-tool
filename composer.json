@@ -16,5 +16,8 @@
     },
     "require-dev": {
         "laravel/pint": "^1.18"
-    }
+    },
+    "bin": [
+        "bin/estimate"
+    ]
 }
