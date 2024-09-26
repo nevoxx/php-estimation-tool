@@ -1,0 +1,8 @@
+.vscode/
+.idea/
+
+vendor/
+
+test.html
+test.pdf
+test.md
