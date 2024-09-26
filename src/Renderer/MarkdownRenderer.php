@@ -19,7 +19,7 @@ class MarkdownRenderer implements RendererInterface
                 $percentage = '';
 
                 if ($node->percentage && $node->percentageLevel) {
-                    $percentage = '{'.str_repeat('^', $node->percentageLevel).$node->percentage.'%}';
+                    $percentage = '{' . str_repeat('^', $node->percentageLevel) . $node->percentage . '%}';
                 }
 
                 $markdown .= "{$indent}- [{$durationFormatted}]{$percentage} {$node->label}\n";

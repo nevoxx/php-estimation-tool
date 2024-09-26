@@ -77,10 +77,10 @@ class CommandLineInterface
 
         echo "Usage: php estimation.php /path/to/markdown.md [options]\n\n";
         echo "Options:\n";
-        echo str_pad('  --render', 40)." 🌟 Enable rendering of the markdown.\n";
-        echo str_pad('  --pdf-outfile=/path/to/output.pdf', 40)." 📄 Specify the PDF output file.\n";
-        echo str_pad('  --md-outfile=/path/to/output.md', 40)." 📜 Specify the Markdown output file.\n";
-        echo str_pad('  --help', 40)." ❓ Display this help message.\n";
+        echo str_pad('  --render', 40) . " 🌟 Enable rendering of the markdown.\n";
+        echo str_pad('  --pdf-outfile=/path/to/output.pdf', 40) . " 📄 Specify the PDF output file.\n";
+        echo str_pad('  --md-outfile=/path/to/output.md', 40) . " 📜 Specify the Markdown output file.\n";
+        echo str_pad('  --help', 40) . " ❓ Display this help message.\n";
         echo "\n";
     }
 
@@ -115,16 +115,16 @@ class CommandLineInterface
             $this->_displayInfo($markdownPath, $render, $pdfOutputFile, $mdOutputFile);
             $this->_processMarkdown($markdownPath, $mdOutputFile, $render);
         } catch (\Exception $e) {
-            echo '❌  An error occurred: '.$e->getMessage()."\n";
+            echo '❌  An error occurred: ' . $e->getMessage() . "\n";
         }
     }
 
     protected function _displayInfo($markdownPath, $render, $pdfOutputFile, $mdOutputFile)
     {
         // Define a title
-        echo "\n".str_repeat('=', 40)."\n";
+        echo "\n" . str_repeat('=', 40) . "\n";
         echo " Estimation Command-Line Interface\n";
-        echo str_repeat('=', 40)."\n\n";
+        echo str_repeat('=', 40) . "\n\n";
 
         // Prepare the output with padding for alignment
         $format = "%-30s: %s\n"; // Left-aligned for label and right-aligned for value
@@ -133,7 +133,7 @@ class CommandLineInterface
         printf($format, 'PDF Output File', $pdfOutputFile);
         printf($format, 'Markdown Output File', $mdOutputFile);
 
-        echo "\n".str_repeat('-', 40)."\n";
+        echo "\n" . str_repeat('-', 40) . "\n";
     }
 
     protected function _processMarkdown($markdownPath, $mdOutputFile, $render)
@@ -204,7 +204,7 @@ class CommandLineInterface
         }
 
         // Calculate the relative path
-        $relativePath = str_replace($normalizedCwd.DIRECTORY_SEPARATOR, '', $normalizedTargetPath);
+        $relativePath = str_replace($normalizedCwd . DIRECTORY_SEPARATOR, '', $normalizedTargetPath);
 
         // Handle case where the path is outside the current directory
         if (strpos($normalizedTargetPath, $normalizedCwd) !== 0) {

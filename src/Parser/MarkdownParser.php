@@ -61,7 +61,7 @@ class MarkdownParser
             } else {
                 // Append to the label if not a list item
                 if ($currentNode !== null) {
-                    $currentNode->label .= "\n".$line;
+                    $currentNode->label .= "\n" . $line;
                 }
             }
         }

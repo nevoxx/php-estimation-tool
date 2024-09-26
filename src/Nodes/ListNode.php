@@ -44,11 +44,11 @@ class ListNode
 
         // If no decimals (e.g., 12.0), show as an integer
         if ($decimals == 0) {
-            return number_format($this->duration, 0, ',', '.').'h';
+            return number_format($this->duration, 0, ',', '.') . 'h';
         }
 
         // If there are decimals, remove trailing zeroes after the decimal
-        return rtrim(number_format($this->duration, 2, ',', '.'), '0').'h';
+        return rtrim(number_format($this->duration, 2, ',', '.'), '0') . 'h';
     }
 
     public function addChild(ListNode $child): void

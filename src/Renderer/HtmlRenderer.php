@@ -51,7 +51,7 @@ class HtmlRenderer implements RendererInterface
         ];
 
         $labelStyles = [
-            'padding-left: '.($index * self::IDENT_PADDING_PIXELS).'px;',
+            'padding-left: ' . ($index * self::IDENT_PADDING_PIXELS) . 'px;',
         ];
 
         $estimateStyles = [
@@ -84,7 +84,7 @@ class HtmlRenderer implements RendererInterface
         $note = '';
         if (! empty($item->note)) {
             $note = "
-        <tr style='".implode(' ', $noteStyles)."'>
+        <tr style='" . implode(' ', $noteStyles) . "'>
           <td></td>
           <td>{$item->note}</td>
         </tr>
@@ -93,8 +93,8 @@ class HtmlRenderer implements RendererInterface
 
         // Main row construction
         $row = "
-      <tr style='".implode(' ', $rowStyles)."'>
-        <td style='".implode(' ', $labelStyles)."'>
+      <tr style='" . implode(' ', $rowStyles) . "'>
+        <td style='" . implode(' ', $labelStyles) . "'>
           <table cellspacing='0' cellpadding='0' border='0'>
             <tr style='vertical-align: top;'>
               <td style='padding: 4px 0px;'>
@@ -108,7 +108,7 @@ class HtmlRenderer implements RendererInterface
           </table>
           <!-- {$prefix}) {$item->label} -->
         </td>
-        <td style='".implode(' ', $estimateStyles)."'>
+        <td style='" . implode(' ', $estimateStyles) . "'>
           {$item->getDurationFormatted()}
         </td>
       </tr>";
@@ -120,7 +120,7 @@ class HtmlRenderer implements RendererInterface
             $idx = 1;
 
             foreach ($item->children as $child) {
-                $result .= $this->_buildRow($child, $index + 1, $prefix.$idx);
+                $result .= $this->_buildRow($child, $index + 1, $prefix . $idx);
                 $idx++;
             }
         }
