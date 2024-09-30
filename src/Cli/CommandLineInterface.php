@@ -9,13 +9,13 @@ use App\Estimations\Renderer\PdfRenderer;
 
 class CommandLineInterface
 {
-    private string $markdownPath;
+    protected string $markdownPath;
 
-    private bool $render = false;
+    protected bool $render = false;
 
-    private string $pdfOutputFile;
+    protected string $pdfOutputFile;
 
-    private string $mdOutputFile;
+    protected string $mdOutputFile;
 
     public function __construct(array $args)
     {
@@ -189,27 +189,28 @@ class CommandLineInterface
      */
     protected function _getRelativePathBasedOnCwd(string $path): string
     {
+        // todo??
         return $path;
-        // Get the current working directory
-        $cwd = getcwd();
-
-        // Normalize the paths to avoid issues with different separators
-        $normalizedCwd = realpath($cwd);
-        $normalizedTargetPath = realpath($path);
-
-        // If the target path is not absolute, return it directly
-        if (! $normalizedTargetPath) {
-            return $path; // Return as-is if it doesn't exist
-        }
-
-        // Calculate the relative path
-        $relativePath = str_replace($normalizedCwd . DIRECTORY_SEPARATOR, '', $normalizedTargetPath);
-
-        // Handle case where the path is outside the current directory
-        if (strpos($normalizedTargetPath, $normalizedCwd) !== 0) {
-            return $normalizedTargetPath; // Return the absolute path if it's outside
-        }
-
-        return $relativePath;
+        //        // Get the current working directory
+        //        $cwd = getcwd();
+        //
+        //        // Normalize the paths to avoid issues with different separators
+        //        $normalizedCwd = realpath($cwd);
+        //        $normalizedTargetPath = realpath($path);
+        //
+        //        // If the target path is not absolute, return it directly
+        //        if (! $normalizedTargetPath) {
+        //            return $path; // Return as-is if it doesn't exist
+        //        }
+        //
+        //        // Calculate the relative path
+        //        $relativePath = str_replace($normalizedCwd . DIRECTORY_SEPARATOR, '', $normalizedTargetPath);
+        //
+        //        // Handle case where the path is outside the current directory
+        //        if (strpos($normalizedTargetPath, $normalizedCwd) !== 0) {
+        //            return $normalizedTargetPath; // Return the absolute path if it's outside
+        //        }
+        //
+        //        return $relativePath;
     }
 }

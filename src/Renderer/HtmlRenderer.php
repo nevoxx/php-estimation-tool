@@ -73,11 +73,11 @@ class HtmlRenderer implements RendererInterface
 
         // Adjust font size based on index level
         if ($index === 0) {
-            $rowStyles[] = 'font-size: 24px;';
-        } elseif ($index === 1) {
-            $rowStyles[] = 'font-size: 20px;';
-        } else {
             $rowStyles[] = 'font-size: 18px;';
+        } elseif ($index === 1) {
+            $rowStyles[] = 'font-size: 16px;';
+        } else {
+            $rowStyles[] = 'font-size: 15px;';
         }
 
         // Optional note

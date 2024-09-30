@@ -98,7 +98,7 @@ class ListNode
 
                 // Apply the percentage to the sum of sibling durations
                 if ($siblingSum > 0) {
-                    $node->duration = ($siblingSum * $node->percentage) / 100;
+                    $node->duration = ceil(($siblingSum * $node->percentage) / 100);
                 }
             }
         }
