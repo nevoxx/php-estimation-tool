@@ -22,10 +22,16 @@ class MarkdownRenderer implements RendererInterface
                     $percentage = '{' . str_repeat('^', $node->percentageLevel) . $node->percentage . '%}';
                 }
 
-                $markdown .= "{$indent}- [{$durationFormatted}]{$percentage} {$node->label}\n";
+                $markdown .= "{$indent}- [{$durationFormatted}]{$percentage} {$node->label}";
             } else {
-                $markdown .= "{$node->label}\n";
+                $markdown .= "{$node->label}";
             }
+
+            if (! empty($node->note)) {
+                $markdown .= " [!] {$node->note}";
+            }
+
+            $markdown .= "\n";
 
             // Traverse children recursively
             foreach ($node->children as $child) {
