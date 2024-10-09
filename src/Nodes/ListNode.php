@@ -4,6 +4,8 @@ namespace App\Estimations\Nodes;
 
 class ListNode
 {
+    public string $id;
+
     public string $label;
 
     public ?float $duration;
@@ -17,20 +19,25 @@ class ListNode
     /** @var ListNode[] */
     public array $children;
 
+    public array $tags;
+
     public function __construct(
         string $label,
         ?float $duration = null,
         ?float $percentage = null,
         ?int $percentageLevel = null,
         ?string $note = null,
-        array $children = []
+        array $children = [],
+        array $tags = []
     ) {
+        $this->id = md5(uniqid('', true));
         $this->label = $label;
         $this->duration = $duration;
         $this->percentage = $percentage;
         $this->percentageLevel = $percentageLevel;
         $this->note = $note;
         $this->children = $children;
+        $this->tags = $tags;
     }
 
     public function getDurationFormatted(): string
@@ -89,7 +96,7 @@ class ListNode
 
                 // Calculate the sum of sibling durations at the ancestor level
                 $siblingSum = array_reduce($ancestorNode->children, function ($sum, $sibling) use ($node) {
-                    if ($sibling !== $node && $sibling->duration !== null) {
+                    if ($sibling->id !== $node->id && $sibling->duration !== null) {
                         return $sum + $sibling->duration;
                     }
 

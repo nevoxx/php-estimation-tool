@@ -91,6 +91,13 @@ class HtmlRenderer implements RendererInterface
       ";
         }
 
+        $tags = '';
+        if (! empty($item->tags)) {
+            foreach ($item->tags as $tag) {
+                $tags .= "<span style='background-color: {$tag['color']}; padding: 4px 6px; border-radius: 8px; color: white; font-weight: normal; font-size: 13px;'>{$tag['text']}</span> ";
+            }
+        }
+
         // Main row construction
         $row = "
       <tr style='" . implode(' ', $rowStyles) . "'>
@@ -101,7 +108,7 @@ class HtmlRenderer implements RendererInterface
                 {$prefix}) 
               </td>
               <td style='padding-top: 4px; padding-bottom: 4px; padding-left: 5px;'>
-                {$item->label}
+                {$tags} {$item->label}
               </td>
             </tr>
             {$note}

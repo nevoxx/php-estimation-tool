@@ -34,8 +34,16 @@ class MarkdownParser
                 // Process label without duration and note
                 $labelWithoutDuration = ltrim(preg_replace(['/\\[.*?h]/', '/\\{.*?}/'], '', $cleanLine), '- ');
                 $labelParts = explode('[!]', $labelWithoutDuration);
-                $labelWithoutNote = trim($labelParts[0]);
+                $labelCleaned = trim($labelParts[0]);
                 $note = isset($labelParts[1]) ? trim(implode('<br>', array_slice($labelParts, 1))) : '';
+
+                $parsedTags = $this->_parseTags($labelCleaned);
+                $tags = [];
+
+                if (! empty($parsedTags['tags'])) {
+                    $tags = $parsedTags['tags'];
+                    $labelCleaned = $parsedTags['cleanedText'];
+                }
 
                 // Maintain the stack according to the indent level
                 while (count($stack) > 0 && $stack[count($stack) - 1][1] >= $indentLevel) {
@@ -44,12 +52,13 @@ class MarkdownParser
 
                 // Create a new node
                 $currentNode = new ListNode(
-                    $labelWithoutNote,
+                    $labelCleaned,
                     $duration,
                     $percentage,
                     $percentageLevel,
                     $note,
                     [],
+                    $tags,
                 );
 
                 // Add the node to its parent
@@ -67,6 +76,37 @@ class MarkdownParser
         }
 
         return $root;
+    }
+
+    protected function _parseTags(string $input)
+    {
+        $pattern = '/\[t:(.*?)\](.*?)\[\/t\]/';
+        $matches = [];
+
+        // Find all matches
+        preg_match_all($pattern, $input, $matches, PREG_SET_ORDER);
+
+        $results = [];
+        $cleanedText = $input;
+
+        foreach ($matches as $match) {
+            $color = $match[1];  // Extracted color
+            $text = $match[2];   // Extracted text
+
+            // Add color and text to results array
+            $results[] = [
+                'color' => $color,
+                'text' => $text,
+            ];
+
+            // Replace each tag occurrence with an empty string in the cleaned text
+            $cleanedText = trim(str_replace($match[0], '', $cleanedText));
+        }
+
+        return [
+            'tags' => $results,
+            'cleanedText' => $cleanedText,
+        ];
     }
 
     protected function _parseDurationAndPercentage(string $label): array
